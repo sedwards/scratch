@@ -2,10 +2,12 @@
 <!--*- mode: xml -*-->
 <interface>
   <object class="GtkMenuItem" id="menubar1">
-              <property name="label" translatable="yes">_File</property>
-              <property name="use-underline">1</property>
-               <child type="submenu">
-                  <object class="GtkMenu" id="menu2">
+            <child>
+              <object class="GtkMenuItem">
+                <property name="label" translatable="yes">_File</property>
+                <property name="use-underline">1</property>
+                <child type="submenu">
+                  <object class="GtkMenu">
                     <child>
                       <object class="GtkMenuItem" id="new_item">
                         <property name="visible">1</property>
@@ -28,6 +30,19 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkMenuItem" id="save_as_item">
+                        <property name="visible">1</property>
+                        <property name="label" translatable="yes">Save _As</property>
+                        <property name="use-underline">1</property>
+                        <accelerator key="s" modifiers="primary | shift-mask" signal="activate"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem">
+                        <property name="visible">1</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkMenuItem" id="quit_item">
                         <property name="visible">1</property>
                         <property name="label" translatable="yes">_Quit</property>
@@ -37,6 +52,8 @@
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
   </object>            
   <object class="GtkMenuItem" id="edititem1">
      <property name="visible">True</property>
@@ -45,7 +62,7 @@
      <property name="label" translatable="yes">_Edit</property>
      <property name="use_underline">True</property>
         <child type="submenu">
-          <object class="GtkMenu" id="menu3">
+          <object class="GtkMenu" id="menu2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
