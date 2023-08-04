@@ -69,7 +69,7 @@ do_builder (GtkWidget *do_widget)
       //filename = demo_find_file ("builder-gtk2.ui", NULL);
       //gtk_builder_add_from_file (builder, filename, &err);
 #if GTK_MAJOR_VERSION < 4
-      gtk_builder_add_from_file (builder, "builder-gtk2.ui", &err);
+      gtk_builder_add_from_file (builder, "builder-gtk3.ui", &err);
 #else
       gtk_builder_add_from_file (builder, "builder-gtk4.ui", &err);
 #endif
