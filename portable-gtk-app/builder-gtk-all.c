@@ -1,7 +1,6 @@
 #include <gtk/gtk.h>
 
 static GtkBuilder *builder;
-//static GtkBuilder *do_widget;
 static GtkWidget *do_widget;
 
 #if GTK_MAJOR_VERSION == 4
@@ -34,7 +33,31 @@ app_activate (GtkWidget *app) {
    do_builder(do_widget);
 }
 
-#if GTK_MAJOR_VERSION < 4
+
+#if GTK_MAJOR_VERSION == 4
+static void
+quit_activate (GSimpleAction *action,
+               GVariant      *parameter,
+               gpointer       user_data)
+{
+  GtkWidget *window = user_data;
+
+  gtk_window_destroy (GTK_WINDOW (window));
+}
+
+static void
+about_activate (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtkWidget *window = user_data;
+  GtkWidget *about_dlg;
+
+  about_dlg = GTK_WIDGET (g_object_get_data (G_OBJECT (window), "about"));
+  gtk_window_present (GTK_WINDOW (about_dlg));
+}
+#else
+
 G_MODULE_EXPORT void
 quit_activate (GtkAction *action)
 {
@@ -53,9 +76,9 @@ about_activate (GtkAction *action)
   gtk_dialog_run (GTK_DIALOG (about_dlg));
   gtk_widget_hide (about_dlg);
 }
+#endif
 
-#else
-
+#if GTK_MAJOR_VERSION == 4
 static void
 remove_timeout (gpointer data)
 {
@@ -127,14 +150,17 @@ GtkWidget *
 do_builder (GtkWidget *do_widget)
 {
   static GtkWidget *window = NULL;
+  GtkWidget *about;
+  GtkWidget *status;
   GError *err = NULL;
   gchar *filename;
-  
+#if GTK_MAJOR_VERSION == 4
+  GActionGroup *actions;
+  GtkEventController *controller;
+#endif
+
   if (!window)
     {
-      GtkWidget *about;
-      GtkWidget *status;
-
       builder = gtk_builder_new ();
 #if GTK_MAJOR_VERSION == 4
       gtk_builder_add_from_file (builder, "builder-gtk4.ui", &err);
