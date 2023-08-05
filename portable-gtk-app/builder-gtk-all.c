@@ -240,10 +240,13 @@ do_builder (GtkWidget *do_widget)
       g_object_set_data (G_OBJECT (window), "status", status);
 
       g_object_unref (builder);
-#endif
 
-#if GTK_MAJOR_VERSION < 4
   if (!gtk_widget_get_visible (window))
+    gtk_widget_show (window);
+  else
+    gtk_window_destroy (GTK_WINDOW (window));
+#else
+if (!gtk_widget_get_visible (window))
     {
       gtk_widget_show_all (window);
     }
