@@ -1,4 +1,8 @@
+#if GTK_MAJOR_VERSION < 3
 #include <gtk/gtk.h>
+#else
+#include <gtk.h>
+#endif
 
 //GtkBuilder *do_builder;
 GtkWidget *do_widget;
@@ -33,17 +37,6 @@ app_activate (GtkWidget *app) {
   /* Remain off scree for now */
 
   main_window = gtk_application_window_new (GTK_APPLICATION (app));
-//#else
-//  main_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-//#endif
-
-//  gtk_window_set_title (GTK_WINDOW (main_window), "lb1");
-//  gtk_window_set_default_size (GTK_WINDOW (main_window), 400, 300);
-
-//  lab = gtk_label_new ("Hello.");
-#if GTK_MAJOR_VERSION == 4
-//  gtk_window_set_child (GTK_WINDOW (main_window), lab);
-#endif
 
   button = gtk_button_new_with_mnemonic("_Button");
 
@@ -54,12 +47,6 @@ app_activate (GtkWidget *app) {
   //grid = gtk_grid_new ();
   //gtk_grid_attach (grid, button, 10, 10, 10, 10);
   //gtk_window_set_child (GTK_WINDOW (main_window), grid);
-#else /* GTK2/3 */
-
-  //gtk_window_set_title(GTK_WINDOW(main_window), "Mnemonic");
-  //gtk_window_set_default_size(GTK_WINDOW(main_window), 300, 200);
-//  gtk_container_set_border_width(GTK_CONTAINER(window), 15);
-
 #endif
 
   do_builder(do_widget);
