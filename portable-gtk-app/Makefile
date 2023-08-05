@@ -37,9 +37,7 @@ builder-gtk3 :
 builder-gtk4 :
 	gcc -o $@ builder-gtk-all.c `pkg-config --libs --cflags gtk4`
 
-all:
-	demo-gtk2 demo-gtk3 demo-gtk4 builder-gtk2 builder-gtk3 builder-gtk4
-
 clean:
-	rm demo-gtk2 demo-gtk3 demo-gtk4 builder-gtk2 builder-gtk3 builder-gtk4
+	rm -f demo-gtk2 demo-gtk3 demo-gtk4 builder-gtk2 builder-gtk3 builder-gtk4
 
+all: demo-gtk2 demo-gtk3 demo-gtk4 builder-gtk2 builder-gtk3 builder-gtk4
