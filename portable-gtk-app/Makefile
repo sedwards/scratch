@@ -1,4 +1,10 @@
 ###
+### All target. Maybe at some point we will have some deps too
+###
+
+all: demo-gtk2 demo-gtk3 demo-gtk4 builder-gtk2 builder-gtk3 builder-gtk4
+
+###
 ### Basic GTK Demos
 ###
 
@@ -13,7 +19,7 @@ demo-gtk4 :
 
 ###
 ### GTK Builder Demos for each version of the library
-###
+### (disabled for now)
 
 #builder-gtk2 :
 #	gcc -o $@ $@.c `pkg-config --libs --cflags gtk+-2.0`
@@ -37,7 +43,10 @@ builder-gtk3 :
 builder-gtk4 :
 	gcc -o $@ builder-gtk-all.c `pkg-config --libs --cflags gtk4`
 
+###
+### Clean target, other useful targets
+###
+
 clean:
 	rm -f demo-gtk2 demo-gtk3 demo-gtk4 builder-gtk2 builder-gtk3 builder-gtk4
 
-all: demo-gtk2 demo-gtk3 demo-gtk4 builder-gtk2 builder-gtk3 builder-gtk4
